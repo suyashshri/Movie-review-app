@@ -31,6 +31,32 @@ router.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/sort/imdb", async (req: Request, res: Response) => {
+  try {
+    const results = await db.query("SELECT * FROM movies ORDER BY imdb DESC");
+    res.status(200).json({
+      message: "Movies retrieved successfully!",
+      length: results.rows.length,
+      data: results.rows,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/sort/year", async (req: Request, res: Response) => {
+  try {
+    const results = await db.query("SELECT * FROM movies ORDER BY year DESC");
+    res.status(200).json({
+      message: "Movies retrieved successfully!",
+      length: results.rows.length,
+      data: results.rows,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 //Add movie
 router.post("/", async (req: Request, res: Response) => {
   try {
